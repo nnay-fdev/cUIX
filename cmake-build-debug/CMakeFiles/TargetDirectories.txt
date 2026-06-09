@@ -1,0 +1,3 @@
+/home/desktopduck/Masaüstü/cUIX/cmake-build-debug/CMakeFiles/cuix_ex.dir
+/home/desktopduck/Masaüstü/cUIX/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/desktopduck/Masaüstü/cUIX/cmake-build-debug/CMakeFiles/rebuild_cache.dir
