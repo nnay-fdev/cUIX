@@ -1,4 +1,6 @@
 #include "event_handler.h"
+#include "shapes.h"
+#include "screen_init.h"
 
 int clicked(const int shape, const int mouse_btn, const screen_conf conf, const void *data) {
     const Vector2 mouse_pos = GetMousePosition();

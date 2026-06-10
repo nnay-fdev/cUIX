@@ -1,4 +1,0 @@
-ToolSet: 1.0 (local)Ninja: 1.13.2@/home/desktopduck/clion-2026.1.1/bin/ninja/linux/x64/ninja
-Options: 
-
-Options:-DCMAKE_MAKE_PROGRAM=/home/desktopduck/clion-2026.1.1/bin/ninja/linux/x64/ninja

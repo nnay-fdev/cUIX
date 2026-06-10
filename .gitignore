@@ -55,5 +55,5 @@ dkms.conf
 *.dwo
 
 # clion additional
-cmake-build-debug
+cmake-build-debug/
 .idea
