@@ -29,6 +29,7 @@ endif()
 # SOURCES at CMakeLists.txt:12 (FILE)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/desktopduck/Masaüstü/cUIX/src/*.c")
 set(OLD_GLOB
+  "/home/desktopduck/Masaüstü/cUIX/src/init.c"
   "/home/desktopduck/Masaüstü/cUIX/src/shapes.c"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

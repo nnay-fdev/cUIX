@@ -1,146 +1,102 @@
-//main UI library
+//Required Libraries
+#include "screen_init.h"
+#include "shapes.h"
+#include "UIXcalc.h"
 #include "raylib.h"
 
-//util libraries
-#include "UIXcalc.h"
-#include "shapes.h"
+//Debug Libraries
+#include "stdio.h"
 
-#include <stdio.h>
+#define GRID_SIZE_X conf.scale.x / conf.placement.row
+#define GRID_SIZE_Y conf.scale.y / conf.placement.column
 
 
-int drew_rect(const rectangle *rect) {
-    //Rectangle Itself
+int drew_rect(const rectangle *rect, const screen_conf conf) {
+    const double x_pos = rect->position.row * GRID_SIZE_X;
+    const double y_pos = rect->position.column * GRID_SIZE_Y;
+
+    //Rectangle
     DrawRectangle(
-        rect->placement.grid_placement.x, rect->placement.grid_placement.y,
+        x_pos,
+        y_pos,
         rect->scale.x, rect->scale.y,
-        rect->color);
+        rect->background_color);
 
-    //Rectangle Border
-    const Rectangle ang = {
-        .x = rect->placement.grid_placement.x,
-        .y = rect->placement.grid_placement.y,
-        .width = rect->scale.x,
-        .height = rect->scale.y
+    //Border
+    const Rectangle r = {
+        x_pos,
+        y_pos,
+        rect->scale.x, rect->scale.y,
     };
-    DrawRectangleLinesEx(
-        ang,
-        rect->border_size,
-        rect->border_color);
+    DrawRectangleLinesEx(r, rect->border_size, rect->border_color);
 
     return rect2dS;
 }
 
-int drew_circle(const circle *circ) {
-    //Circle Border
+int drew_circle(const circle *circ, const screen_conf conf) {
+    const double x_pos = circ->position.row * GRID_SIZE_X;
+    const double y_pos = circ->position.column * GRID_SIZE_Y;
+
+    //Border
     DrawCircle(
-        circ->placement.grid_placement.x, circ->placement.grid_placement.y,
+        x_pos,
+        y_pos,
         circ->radius + circ->border_size,
         circ->border_color);
 
-    //Circle Itself
+    //Circle
     DrawCircle(
-        circ->placement.grid_placement.x, circ->placement.grid_placement.y,
+        x_pos,
+        y_pos,
         circ->radius,
-        circ->color);
+        circ->background_color);
 
     return circle2dS;
 }
 
-//hope it works
-int drew_button(const button *btn) {
-    //Button Background
+int drew_text(const text *textbox, const screen_conf conf) {
+    const double x_pos = textbox->position.row * GRID_SIZE_X;
+    const double y_pos = textbox->position.column * GRID_SIZE_Y;
+
+    //Text
+    DrawText(
+        textbox->content,
+        x_pos,
+        y_pos,
+        textbox->font_size,
+        textbox->text_color);
+
+    return text2dS;
+}
+
+int drew_button(const button *btn, const screen_conf conf) {
+    const double x_pos = btn->position.row * GRID_SIZE_X;
+    const double y_pos = btn->position.column * GRID_SIZE_Y;
+
+    //Background
     DrawRectangle(
-        btn->placement.grid_placement.x, btn->placement.grid_placement.y,
+        x_pos,
+        y_pos,
         btn->scale.x, btn->scale.y,
-        btn->color);
+        btn->background_color);
 
-    //Button Text (I hate this)
-    const int text_size = MeasureText(btn->content, btn->font_size);
-    const textbox tbox = {
-        .placement = {
-            .grid_placement = {
-                .x = btn->placement.grid_placement.x + ((btn->scale.x - text_size) / 2),
-                .y = btn->placement.grid_placement.y + ((btn->scale.y - btn->font_size) / 2),
-            },
-            .grid_size = btn->placement.grid_size
-        },
-        .font_size = btn->font_size,
-        .color = btn->text_color,
-        .content = btn->content,
+    //Border
+    const Rectangle r = {
+        x_pos,
+        y_pos,
+        btn->scale.x, btn->scale.y,
     };
-    drew_textbox(&tbox);
+    DrawRectangleLinesEx(r, btn->border_size, btn->border_color);
 
-    //Button Border
-    const Rectangle ang = {
-        .x = btn->placement.grid_placement.x,
-        .y = btn->placement.grid_placement.y,
-        .width = btn->scale.x,
-        .height = btn->scale.y
-    };
-    DrawRectangleLinesEx(
-        ang,
-        btn->border_size,
-        btn->border_color);
+    //Text
+    const int text_len = MeasureText(btn->content, btn->font_size);
+    DrawText(
+        btn->content,
+        x_pos + ((btn->scale.x - text_len) / 2),
+        y_pos + ((btn->scale.y - btn->font_size) / 2),
+        btn->font_size,
+        btn->foreground_color);
 
     return button2dS;
 }
 
-int drew_textbox(const textbox *tbox) {
-    DrawText(
-        tbox->content,
-        tbox->placement.grid_placement.x, tbox->placement.grid_placement.y,
-        tbox->font_size,
-        tbox->color);
-
-    return textbox2dS;
-}
-
-int drew(const int shape, const void *data) {
-    switch (shape) {
-        case rect2dS:
-            return drew_rect((rectangle *)data);
-
-        case circle2dS:
-            return drew_circle((circle *)data);
-
-        case button2dS:
-            return drew_button((button *)data);
-
-        case textbox2dS:
-            return drew_textbox((textbox *)data);
-
-        default:
-            return -1;
-    }
-}
-
-int main() {
-    InitWindow(1000, 1000, "content");
-    SetTargetFPS(60);
-
-    const button btn = {
-        .placement = {
-            .grid_placement = {450, 450},
-            .grid_size = {0, 0}
-        },
-        .font_size = 36,
-        .color = GRAY,
-        .border_color = WHITE,
-        .content = "Press Me",
-        .border_size = 5,
-        .scale = {200, 200},
-        .text_color = BLACK,
-        .clicked = false
-    };
-
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        ClearBackground(BLACK);
-
-        drew(button2dS, &btn);
-
-        EndDrawing();
-    }
-    CloseWindow();
-    return 0;
-}

@@ -1,82 +1,65 @@
 #pragma once
 
-#pragma region INCLUDE
-
-#include "raylib.h"
-#include "math.h"
+#include "screen_init.h"
 #include "UIXcalc.h"
+#include "raylib.h"
 
-#pragma endregion //INCLUDE
 
-
-#pragma region SHAPES
-
-typedef struct rectangle {
-    grid2d placement;
+typedef struct {
+    grid position;
     vector2d scale;
 
-    Color color;
+    Color background_color;
     Color border_color;
 
     int border_size;
 } rectangle;
 
-typedef struct circle {
-    grid2d placement;
+typedef struct {
+    grid position;
 
-    Color color;
+    Color background_color;
     Color border_color;
 
     int radius;
     int border_size;
 } circle;
 
-typedef struct button {
-    grid2d placement;
-    vector2d scale;
+typedef struct {
+    grid position;
 
-    Color color;
-    Color border_color;
     Color text_color;
 
     int font_size;
+
+    const char *content;
+} text;
+
+typedef struct {
+    grid position;
+    vector2d scale;
+
+    Color background_color;
+    Color foreground_color;
+    Color border_color;
+
     int border_size;
-    int clicked;
+    int font_size;
 
     const char *content;
 } button;
 
-typedef struct textbox {
-    grid2d placement;
 
-    Color color;
-
-    int font_size;
-    const char *content;
-} textbox;
-
-#pragma endregion //SHAPES
-
-
-#pragma region SHAPE_ENUM
-
-typedef enum shapes {
+typedef enum {
     rect2dS,
     circle2dS,
-    button2dS,
-    textbox2dS
+    text2dS,
+    button2dS
 } shapes;
 
-#pragma endregion //SHAPE_ENUM
+int drew_rect(const rectangle *rect, const screen_conf conf);
+int drew_circle(const circle *circ, const screen_conf conf);
+int drew_text(const text *textbox, const screen_conf conf);
+int drew_button(const button *btn, const screen_conf conf);
 
-
-#pragma region FUNCTIONS
-
-int drew_rect(const rectangle *rect);
-int drew_circle(const circle *circ);
-int drew_button(const button *btn);
-int drew_textbox(const textbox *tbox);
-
-int drew(const int shape, const void *data);
-
-#pragma endregion //FUNCTIONS
+int drew(const int shape, const screen_conf conf, void *data);

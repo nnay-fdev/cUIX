@@ -49,6 +49,16 @@ cmake_ninja_workdir = /home/desktopduck/Masaüstü/cUIX/cmake-build-debug/
 
 build cmake_object_order_depends_target_cuix_ex: phony || .
 
+build CMakeFiles/cuix_ex.dir/src/init.c.o: C_COMPILER__cuix_ex_unscanned_Debug /home/desktopduck/Masaüstü/cUIX/src/init.c || cmake_object_order_depends_target_cuix_ex
+  CONFIG = Debug
+  DEFINES = -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED
+  DEP_FILE = CMakeFiles/cuix_ex.dir/src/init.c.o.d
+  FLAGS = -g -std=gnu2x -fdiagnostics-color=always
+  INCLUDES = -I/home/desktopduck/Masaüstü/cUIX/include
+  OBJECT_DIR = CMakeFiles/cuix_ex.dir
+  OBJECT_FILE_DIR = CMakeFiles/cuix_ex.dir/src
+  TARGET_SUPPORT_DIR = CMakeFiles/cuix_ex.dir
+
 build CMakeFiles/cuix_ex.dir/src/shapes.c.o: C_COMPILER__cuix_ex_unscanned_Debug /home/desktopduck/Masaüstü/cUIX/src/shapes.c || cmake_object_order_depends_target_cuix_ex
   CONFIG = Debug
   DEFINES = -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED
@@ -67,7 +77,7 @@ build CMakeFiles/cuix_ex.dir/src/shapes.c.o: C_COMPILER__cuix_ex_unscanned_Debug
 #############################################
 # Link the executable cuix_ex
 
-build cuix_ex: C_EXECUTABLE_LINKER__cuix_ex_Debug CMakeFiles/cuix_ex.dir/src/shapes.c.o | /usr/lib/libraylib.so.6.0.0
+build cuix_ex: C_EXECUTABLE_LINKER__cuix_ex_Debug CMakeFiles/cuix_ex.dir/src/init.c.o CMakeFiles/cuix_ex.dir/src/shapes.c.o | /usr/lib/libraylib.so.6.0.0
   CONFIG = Debug
   DEP_FILE = CMakeFiles/cuix_ex.dir/link.d
   FLAGS = -g

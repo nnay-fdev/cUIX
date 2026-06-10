@@ -1,6 +1,12 @@
 [
 {
   "directory": "/home/desktopduck/Masaüstü/cUIX/cmake-build-debug",
+  "command": "/usr/bin/cc -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED -I/home/desktopduck/Masaüstü/cUIX/include -g -std=gnu2x -fdiagnostics-color=always -o CMakeFiles/cuix_ex.dir/src/init.c.o -c /home/desktopduck/Masaüstü/cUIX/src/init.c",
+  "file": "/home/desktopduck/Masaüstü/cUIX/src/init.c",
+  "output": "/home/desktopduck/Masaüstü/cUIX/cmake-build-debug/CMakeFiles/cuix_ex.dir/src/init.c.o"
+},
+{
+  "directory": "/home/desktopduck/Masaüstü/cUIX/cmake-build-debug",
   "command": "/usr/bin/cc -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -DUSE_LIBTYPE_SHARED -I/home/desktopduck/Masaüstü/cUIX/include -g -std=gnu2x -fdiagnostics-color=always -o CMakeFiles/cuix_ex.dir/src/shapes.c.o -c /home/desktopduck/Masaüstü/cUIX/src/shapes.c",
   "file": "/home/desktopduck/Masaüstü/cUIX/src/shapes.c",
   "output": "/home/desktopduck/Masaüstü/cUIX/cmake-build-debug/CMakeFiles/cuix_ex.dir/src/shapes.c.o"
